@@ -1,20 +1,20 @@
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/frontend/components/ui/toaster";
+import { Toaster as Sonner } from "@/frontend/components/ui/sonner";
+import { TooltipProvider } from "@/frontend/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup";
-import DashboardLayout from "./layouts/DashboardLayout";
-import Dashboard from "./pages/dashboard/Dashboard";
-import UploadDocument from "./pages/dashboard/UploadDocument";
-import Documents from "./pages/dashboard/Documents";
-import DocumentDetail from "./pages/dashboard/DocumentDetail";
-import VerificationHistory from "./pages/dashboard/VerificationHistory";
-import Profile from "./pages/dashboard/Profile";
+import Index from "@/frontend/pages/Index";
+import NotFound from "@/frontend/pages/NotFound";
+import Login from "@/frontend/pages/auth/Login";
+import Signup from "@/frontend/pages/auth/Signup";
+import DashboardLayout from "@/frontend/layouts/DashboardLayout";
+import Dashboard from "@/frontend/pages/dashboard/Dashboard";
+import UploadDocument from "@/frontend/pages/dashboard/UploadDocument";
+import Documents from "@/frontend/pages/dashboard/Documents";
+import DocumentDetail from "@/frontend/pages/dashboard/DocumentDetail";
+import VerificationHistory from "@/frontend/pages/dashboard/VerificationHistory";
+import Profile from "@/frontend/pages/dashboard/Profile";
 
 const queryClient = new QueryClient();
 
