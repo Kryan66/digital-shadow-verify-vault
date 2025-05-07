@@ -1,5 +1,14 @@
 
-// Export all frontend-related components and utilities
+// Export all frontend modules
+
+// Components
 export * from './components';
-export * from './pages';
+
+// Hooks
 export * from './hooks';
+
+// Layouts
+export { default as DashboardLayout } from './layouts/DashboardLayout';
+
+// Pages
+export * from './pages';

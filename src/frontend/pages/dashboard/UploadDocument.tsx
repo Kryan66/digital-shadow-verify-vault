@@ -1,3 +1,3 @@
 
-// Re-export the original UploadDocument page
-export { default } from "@/pages/dashboard/UploadDocument";
+// Re-export the refactored UploadDocument page
+export { default } from "@/pages/dashboard/upload";

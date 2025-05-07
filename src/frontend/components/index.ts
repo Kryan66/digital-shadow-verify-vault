@@ -8,5 +8,7 @@ export { default as Navbar } from './Navbar';
 
 // Re-export UI components where available
 export * from './ui/tooltip';
-export * from './ui/sonner';
-export * from './ui/toaster';
+// Export named components to avoid name conflicts
+export { Toaster as SonnerToaster, toast as sonnerToast } from './ui/sonner';
+export { Toaster } from './ui/toaster';
+
