@@ -67,17 +67,19 @@ const UploadDocument = () => {
   };
   
   const handleFile = (file: File) => {
-    if (file.type !== "application/pdf") {
-      toast.error("Only PDF files are allowed");
+    // For demo purposes, accept more file types
+    if (!file.type.includes('pdf') && !file.type.includes('image/')) {
+      toast.error("Only PDF and image files are allowed");
       return;
     }
     
-    if (file.size > 5 * 1024 * 1024) { // 5MB
-      toast.error("File size exceeds 5MB limit");
+    if (file.size > 10 * 1024 * 1024) { // 10MB
+      toast.error("File size exceeds 10MB limit");
       return;
     }
     
     setSelectedFile(file);
+    toast.success("File selected successfully!");
   };
   
   const onSubmit = async (values: UploadFormValues) => {
@@ -88,31 +90,51 @@ const UploadDocument = () => {
     
     setIsLoading(true);
     
-    // Simulate API call for document upload and blockchain verification
-    setTimeout(() => {
-      console.log("Upload values:", values);
-      console.log("File:", selectedFile);
+    try {
+      // Create form data for file upload (useful for real API integration)
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      formData.append('documentType', values.documentType);
+      formData.append('documentId', values.documentId);
+      formData.append('issueDate', values.issueDate);
       
+      console.log("Upload form data:", Object.fromEntries(formData.entries()));
+      
+      // Simulate API call for document upload and blockchain verification
+      setTimeout(() => {
+        console.log("Upload values:", values);
+        console.log("File:", selectedFile);
+        
+        // Mock document data to be stored
+        const documentData = {
+          id: `doc-${Date.now()}`,
+          type: values.documentType,
+          documentId: values.documentId,
+          issueDate: values.issueDate,
+          fileName: selectedFile.name,
+          fileSize: selectedFile.size,
+          fileType: selectedFile.type,
+          uploadDate: new Date().toISOString(),
+          status: "pending",
+        };
+        
+        // Store in local storage for demo purposes
+        const existingDocs = JSON.parse(localStorage.getItem("documents") || "[]");
+        localStorage.setItem("documents", JSON.stringify([...existingDocs, documentData]));
+        
+        setIsLoading(false);
+        toast.success("Document uploaded and sent for verification!");
+        
+        // Navigate after a brief delay to ensure toast is seen
+        setTimeout(() => {
+          navigate("/dashboard/documents");
+        }, 1000);
+      }, 2000);
+    } catch (error) {
       setIsLoading(false);
-      toast.success("Document uploaded and sent for verification!");
-      
-      // Mock document data to be stored
-      const documentData = {
-        id: `doc-${Date.now()}`,
-        type: values.documentType,
-        documentId: values.documentId,
-        issueDate: values.issueDate,
-        fileName: selectedFile.name,
-        uploadDate: new Date().toISOString(),
-        status: "pending",
-      };
-      
-      // Store in local storage for demo purposes
-      const existingDocs = JSON.parse(localStorage.getItem("documents") || "[]");
-      localStorage.setItem("documents", JSON.stringify([...existingDocs, documentData]));
-      
-      navigate("/dashboard/documents");
-    }, 3000);
+      toast.error("Failed to upload document. Please try again.");
+      console.error("Upload error:", error);
+    }
   };
   
   return (
@@ -231,7 +253,7 @@ const UploadDocument = () => {
                     </div>
                     <p className="text-lg mb-2">Drag & drop your document here</p>
                     <p className="text-sm text-cyber-gray mb-4">
-                      Only PDF files are allowed (Max 5MB)
+                      PDF and image files are allowed (Max 10MB)
                     </p>
                     <label htmlFor="file-upload">
                       <Button 
@@ -244,7 +266,7 @@ const UploadDocument = () => {
                       <input
                         id="file-upload"
                         type="file"
-                        accept=".pdf"
+                        accept=".pdf,.jpg,.jpeg,.png"
                         onChange={handleFileChange}
                         className="hidden"
                       />
