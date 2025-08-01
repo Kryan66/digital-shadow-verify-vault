@@ -1,0 +1,84 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 263 90% 51%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 12 60% 50%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground bg-cyber-grid bg-[size:50px_50px];
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer utilities {
+  .neon-text {
+    @apply text-cyber-purple;
+    text-shadow: 0 0 5px rgba(139, 92, 246, 0.7), 0 0 10px rgba(139, 92, 246, 0.5);
+  }
+  
+  .neon-border {
+    @apply border border-cyber-purple shadow-[0_0_10px_rgba(139,92,246,0.7)];
+  }
+  
+  .cyber-panel {
+    @apply bg-black/30 backdrop-blur-sm border border-cyber-purple/30 rounded-md shadow-md;
+  }
+  
+  .cyber-button {
+    @apply relative overflow-hidden bg-cyber-purple/20 border border-cyber-purple hover:bg-cyber-purple/40
+    text-white py-2 px-4 rounded transition-all duration-300 shadow-md hover:shadow-lg 
+    before:content-[''] before:absolute before:top-0 before:left-[-10px] before:w-[120%] before:h-full
+    before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent
+    before:transform before:rotate-45 before:transition-transform before:duration-500
+    hover:before:translate-x-[120%];
+  }
+}
+
+#root {
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
